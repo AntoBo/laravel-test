@@ -1,0 +1,5 @@
+version: '2'
+services:
+    test_web:
+        ports:
+            - "45002:80"
