@@ -39,6 +39,15 @@
                 padding: 15px;
                 min-width: 100px;
             }
+            li{
+                display: flex;
+                align-items: center;
+            }
+            li button{
+                min-width: 0;
+                padding: 3px 7px;
+                margin-left: 5px;
+            }
         </style>
     </head>
     <body class="antialiased">
@@ -60,7 +69,16 @@
             <h2>Users</h2>
             <ol>
                 @foreach($users as $user)
-                    <li>Name: {{$user->name}}, Phone: {{$user->phone}}</li>
+                    <li>
+                        <p>
+                            Name: {{$user->name}}, Phone: {{$user->phone}}
+                        </p>
+                        <form method="post" action="{{ route('deleteUser', ['id' => $user->id]) }}" class="remove-user-form">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" value="delete">X</button>
+                        </form>
+                    </li>
                 @endforeach
             </ol>
         </div>

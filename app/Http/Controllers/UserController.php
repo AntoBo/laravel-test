@@ -18,8 +18,13 @@ class UserController extends Controller
 
         $newUser->save();
 
-//        \Log::info(json_encode($newUser->all()));
-
         return view('user_added');
+    }
+
+    public function deleteUser($id){
+
+        User::destroy($id);
+
+        return view('user_removed');
     }
 }

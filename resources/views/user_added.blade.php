@@ -43,9 +43,6 @@
         <div class="container">
             <h1>User added</h1>
             <a href="/">Ok</a>
-{{--            <form>--}}
-{{--                <button type="submit" action=""{{ route('/') }}"">Ok</button>--}}
-{{--            </form>--}}
         </div>
     </body>
 </html>

@@ -18,6 +18,13 @@ Route::get('/', [UserController::class, 'index']);
 
 Route::post('/createUserRoute', [UserController::class, 'createUser'])->name('createUser');
 
+Route::delete('/deleteUserRoute/{id}', [UserController::class, 'deleteUser'])->name('deleteUser');
+
+//Route::delete('/deleteUserRoute/{id}', function ($id){
+////    \Log::info(json_encode('user deleting ', $id));
+//})->name('deleteUser');
+
+
 //Route::post('/createUserRoute', function () {
 //    return view('welcome');
 //})->name('createUser');
