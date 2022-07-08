@@ -21,15 +21,15 @@
             <a class="btn link" href="/user/create/">Create new user</a>
 
             <h1>Users</h1>
-            @isset($hasNewUser)
+            @isset(request()->hasNewUser)
             <p class="user-action">New user added</p>
             @endisset
 
-            @isset($userDestroyed)
+            @isset(request()->userDestroyed)
                 <p class="user-action">User destroyed</p>
             @endisset
 
-            @isset($userEdited)
+            @isset(request()->userEdited)
                 <p class="user-action">User edited</p>
             @endisset
             <ol>
@@ -39,28 +39,13 @@
                             Name: {{$user->name}}, Phone: {{$user->phone}}
                         </p>
 
-{{--                        <a href="/editUserRoute/{userToEdit}" action="{{ route('editUser', ['userToEdit' => $user]) }}" class="edit-btn">Edit</a>--}}
-
-                        <form method="post"
-                              action="{{ route('show', ['userToShow' => $user]) }}"
-                              class="remove-user-form">
-                            @method('get')
-                            @csrf
-                            <button type="submit" value="edit">Show</button>
-                        </form>
-
-                        <form method="post"
-                              action="{{ route('edit', ['userToEdit' => $user]) }}"
-                              class="remove-user-form">
-                            @method('put')
-                            @csrf
-                            <button type="submit" value="edit">Edit</button>
-                        </form>
+                        <a href="{{ route('show', ['user' => $user]) }}" class="btn">Show</a>
+                        <a href="{{ route('edit', ['user' => $user]) }}" class="btn">Edit</a>
 
                         <form method="post" action="{{ route('destroy', ['id' => $user->id]) }}" class="remove-user-form">
                             @method('delete')
                             @csrf
-                            <button type="submit" value="delete">Delete</button>
+                            <button class="btn" type="submit" value="delete">Delete</button>
                         </form>
                     </li>
                 @endforeach

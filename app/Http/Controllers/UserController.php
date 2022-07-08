@@ -12,31 +12,32 @@ class UserController extends Controller
     }
 
     public function create(){
-        return view('create');
+        return view('user.create');
+    }
+
+    public function show(User $user){
+//        dd($user);
+        return view('user.show', ['user' => $user]);
+    }
+
+    public function edit(User $user){
+//        dd($user);
+        return view('user.edit', ['user' => $user]);
     }
 
     public function store(Request $request){
         User::create(['name' => $request->name, 'phone' => $request->phone]);
-        return view('index', ['users' => User::all(), 'hasNewUser' => true]);
+        return redirect()->route('index', ['users' => User::all(), 'hasNewUser' => true]);
     }
 
     public function destroy($id){
         User::destroy($id);
-        return view('index', ['users' => User::all(), 'userDestroyed' => true]);
+        return redirect()->route('index', ['users' => User::all(), 'userDestroyed' => true]);
+//        return view('index', ['users' => User::all(), 'userDestroyed' => true]);
     }
 
-    public function show(User $userToShow){
-//        dd($userToShow);
-        return view('show', ['userToShow' => $userToShow]);
-    }
-
-    public function edit(User $userToEdit){
-//        dd($userToEdit);
-        return view('edit', ['userToEdit' => $userToEdit]);
-    }
-
-    public function update(Request $request, User $userToEdit){
-        $userToEdit->update($request->all());
-        return view('index', ['users' => User::all(), 'userEdited' => true]);
+    public function update(Request $request, User $user){
+        $user->update($request->all());
+        return redirect()->route('index', ['users' => User::all(), 'userEdited' => true]);
     }
 }
