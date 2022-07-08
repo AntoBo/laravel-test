@@ -39,3 +39,5 @@ yarn-error.log
 /.idea
 /.vscode
 >>>>>>> 008cf49 (create users, list)
+
+.DS_Store

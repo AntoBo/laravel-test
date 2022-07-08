@@ -14,11 +14,26 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [UserController::class, 'index']);
+Route::get('/', function () {
+    return redirect('/users');
+});
 
-Route::post('/createUserRoute', [UserController::class, 'createUser'])->name('createUser');
+Route::get('/users', [UserController::class, 'index']);
 
-Route::delete('/deleteUserRoute/{id}', [UserController::class, 'deleteUser'])->name('deleteUser');
+Route::get('/users/{userToShow}', [UserController::class, 'show'])->name('show');
+
+Route::get('/user/create', [UserController::class, 'create'])->name('create');
+
+Route::post('/store', [UserController::class, 'store'])->name('store');
+
+Route::put('/users/{userToEdit}/edit', [UserController::class, 'edit'])->name('edit');
+//Route::put('/editUserRoute/{id}', [UserController::class, 'editUser'])->name('editUser');
+
+Route::put('/users/{userToEdit}', [UserController::class, 'update'])->name('update');
+
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('destroy');
+
+Route::resource('post', "App\Http\Controllers\PostController");
 
 //Route::delete('/deleteUserRoute/{id}', function ($id){
 ////    \Log::info(json_encode('user deleting ', $id));

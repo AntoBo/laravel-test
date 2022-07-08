@@ -8,23 +8,35 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(){
-        return view('welcome', ['users' => User::all()]);
-    }
-    public function createUser(Request $request){
-
-        $newUser = new User;
-        $newUser->name=$request->name;
-        $newUser->phone=$request->phone;
-
-        $newUser->save();
-
-        return view('user_added');
+        return view('index', ['users' => User::all()]);
     }
 
-    public function deleteUser($id){
+    public function create(){
+        return view('create');
+    }
 
+    public function store(Request $request){
+        User::create(['name' => $request->name, 'phone' => $request->phone]);
+        return view('index', ['users' => User::all(), 'hasNewUser' => true]);
+    }
+
+    public function destroy($id){
         User::destroy($id);
+        return view('index', ['users' => User::all(), 'userDestroyed' => true]);
+    }
 
-        return view('user_removed');
+    public function show(User $userToShow){
+//        dd($userToShow);
+        return view('show', ['userToShow' => $userToShow]);
+    }
+
+    public function edit(User $userToEdit){
+//        dd($userToEdit);
+        return view('edit', ['userToEdit' => $userToEdit]);
+    }
+
+    public function update(Request $request, User $userToEdit){
+        $userToEdit->update($request->all());
+        return view('index', ['users' => User::all(), 'userEdited' => true]);
     }
 }
