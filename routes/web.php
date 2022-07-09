@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +19,15 @@ Route::get('/', function () {
     return redirect('/users');
 });
 
+//USERS
+
 Route::get('/users', [UserController::class, 'index'])->name('index');
 
 Route::get('/users/{user}', [UserController::class, 'show'])->name('show');
 
 Route::get('/user/create', [UserController::class, 'create'])->name('create');
 
-Route::post('/store', [UserController::class, 'store'])->name('store');
+Route::post('/users', [UserController::class, 'store'])->name('store');
 
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('edit');
 //Route::put('/editUserRoute/{id}', [UserController::class, 'editUser'])->name('editUser');
@@ -33,8 +36,13 @@ Route::put('/users/{user}', [UserController::class, 'update'])->name('update');
 
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('destroy');
 
+// POSTS
 
-Route::resource('post', "App\Http\Controllers\PostController");
+Route::post('/posts', [PostController::class, 'store'])->name('posts-store');
+
+
+//Route::resource('post', "App\Http\Controllers\PostController");
+
 
 //Route::delete('/deleteUserRoute/{id}', function ($id){
 ////    \Log::info(json_encode('user deleting ', $id));

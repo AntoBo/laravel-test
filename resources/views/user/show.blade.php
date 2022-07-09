@@ -22,7 +22,7 @@
             <p class="phone">phone: {{$user->phone}}</p>
             <h2>Add new post</h2>
             <form method="post" class="post-form"
-{{--                  action="{{ route('store') }}"--}}
+                  action="{{ route('posts-store') }}"
                   >
                 @csrf
                 <label for="title">

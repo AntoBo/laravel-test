@@ -9,4 +9,9 @@ class User extends Model
 {
     protected $fillable = ['name', 'phone'];
     use HasFactory;
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
