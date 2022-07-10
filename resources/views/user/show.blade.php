@@ -22,8 +22,9 @@
             <p class="phone">phone: {{$user->phone}}</p>
             <h2>Add new post</h2>
             <form method="post" class="post-form"
-                  action="{{ route('posts-store') }}"
+                  action="{{ route('create-post', ['id' => $user->id]) }}"
                   >
+                @method('post')
                 @csrf
                 <label for="title">
                     Title
@@ -32,16 +33,18 @@
                 <label for="content">
                     Content
                 </label>
-                    <textarea name="content" rows="14" cols="50">
+                    <textarea name="body" rows="14" cols="50">
                         post content
                     </textarea>
                 <button type="submit">Post</button>
             </form>
             <ul class="posts">
-                <li>
-                    <p>Post title ...</p>
-                    <p>Post content</p>
+                @foreach($user->posts as $post)
+                <li class="posts-item">
+                    <h3>{{$post->title}}</h3>
+                    <p>{{$post->body}}</p>
                 </li>
+                @endforeach
             </ul>
         </div>
     </body>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -22,9 +23,18 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $user = User::find($request->id);
+//        dd($user);
+//        $post = Post::create(request()->all());
+        $post = new Post(['title' => $request->title, 'body' => $request->body]);
+//        dd($post);
+
+        $user->posts()->save($post);
+
+        return redirect()->route('show', ['user' => $user]);
+//        return redirect()->route('user.show', ['user' => $user]);
     }
 
     /**
@@ -33,11 +43,18 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
+//    public function store(Request $request, User $user)
     {
-        dd($request);
-        Post::create(['title' => $request->title, 'body' => $request->body]);
-        return redirect()->route('user.show', ['users' => User::all()]);
+
+//        dd($request->user_id);
+//        $post = Post::create(request()->all());
+////        $post = new Post(['title' => $request->title, 'body' => $request->body]);
+//
+//        dd($post);
+//        $user->posts()->save($post);
+//
+//        return redirect()->route('user.show', ['user' => $user]);
     }
 
     /**

@@ -26,7 +26,7 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
-        dd($request);
+//        dd($request);
         User::create(['name' => $request->name, 'phone' => $request->phone]);
         return redirect()->route('index', ['users' => User::all(), 'hasNewUser' => true]);
     }
