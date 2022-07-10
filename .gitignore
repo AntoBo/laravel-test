@@ -41,3 +41,4 @@ yarn-error.log
 >>>>>>> 008cf49 (create users, list)
 
 .DS_Store
+/data/volumes/
