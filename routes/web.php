@@ -38,7 +38,7 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('destroy'
 
 // POSTS
 
-Route::post('/posts', [PostController::class, 'create'])->name('create-post');
+Route::post('users/{user}/posts', [PostController::class, 'store'])->name('store.post');
 
 
 //Route::resource('post', "App\Http\Controllers\PostController");

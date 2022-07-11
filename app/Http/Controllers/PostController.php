@@ -25,16 +25,16 @@ class PostController extends Controller
      */
     public function create(Request $request)
     {
-        $user = User::find($request->id);
-//        dd($user);
-//        $post = Post::create(request()->all());
-        $post = new Post(['title' => $request->title, 'body' => $request->body]);
-//        dd($post);
-
-        $user->posts()->save($post);
-
-        return redirect()->route('show', ['user' => $user]);
-//        return redirect()->route('user.show', ['user' => $user]);
+//        $user = User::find($request->id);
+////        dd($user);
+////        $post = Post::create(request()->all());
+//        $post = new Post(['title' => $request->title, 'body' => $request->body]);
+////        dd($post);
+//
+//        $user->posts()->save($post);
+//
+////        return  ['user' => $user, 'hasNewPost' => true];
+//        return redirect()->route('show', ['user' => $user, 'hasNewPost' => true]);
     }
 
     /**
@@ -43,10 +43,27 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+//    public function store(Request $request)
     public function store(Request $request, User $user)
-//    public function store(Request $request, User $user)
     {
 
+//        dd($request->all());
+        $validated = $request->validate([
+            'title' => 'required|unique:posts|max:5',
+            'body' => 'required',
+        ]);
+
+//        $user = User::find($request->id);
+//        $post = new Post(['title' => $request->title, 'body' => $request->body]);
+//        $post = Post::create($request->all());
+
+        $user->posts()->create($request->all());
+        return redirect()->back();
+
+//        return redirect()->route('show', ['user' => $user, 'hasNewPost' => true]);
+
+//        return  ['user' => $user, 'hasNewPost' => true];
+//        $post = Post::create(request()->all());
 //        dd($request->user_id);
 //        $post = Post::create(request()->all());
 ////        $post = new Post(['title' => $request->title, 'body' => $request->body]);
