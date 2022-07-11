@@ -60,8 +60,8 @@ export default {
                     this.error = res.statusText;
                 }
             }
-            catch {
-                throw new Error(this.error);
+            catch(error) {
+                throw new Error(error.message);
             }
 
         }

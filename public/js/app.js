@@ -5383,7 +5383,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: ['user', 'posts'],
   data: function data() {
     return {
-      error: 'WRONG!',
+      error: '',
       postsToRender: this.posts,
       form: {
         title: '',
@@ -5396,32 +5396,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var res;
+        var _res;
+
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                _context.prev = 0;
+                _context.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(_this.user.id, "/posts"), {
                   title: _this.form.title,
                   body: _this.form.body
                 });
 
-              case 2:
-                res = _context.sent;
+              case 3:
+                _res = _context.sent;
 
-                if (res.statusText === 'OK') {
-                  _this.postsToRender = res.data;
+                if (_res.statusText === 'OK') {
+                  _this.postsToRender = _res.data;
                 } else {
-                  _this.error = res.statusText;
+                  _this.error = _res.statusText;
                 }
 
-              case 4:
+                _context.next = 11;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+                _this.error = res.message;
+                throw new Error(_this.error);
+
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[0, 7]]);
       }))();
     }
   },

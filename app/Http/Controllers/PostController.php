@@ -47,14 +47,15 @@ class PostController extends Controller
     public function store(Request $request, User $user)
     {
 
+        $validated = $request->validate([
+            'title' => 'required|unique:posts|max:5',
+            'body' => 'required',
+        ]);
+
         $user->posts()->create($request->all());
         return $user->posts;
 
 //        dd($request->all());
-//        $validated = $request->validate([
-//            'title' => 'required|unique:posts|max:5',
-//            'body' => 'required',
-//        ]);
 
 //        $user = User::find($request->id);
 //        $post = new Post(['title' => $request->title, 'body' => $request->body]);
