@@ -42,4 +42,6 @@ yarn-error.log
 
 .DS_Store
 data/volumes/
+data/volumes/db/ib_logfile0
+
 ib_logfile0

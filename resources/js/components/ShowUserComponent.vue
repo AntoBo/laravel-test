@@ -38,7 +38,6 @@ import axios from 'axios';
 
 export default {
     props: ['user', 'posts'],
-
     data() {
         return {
             error: '',
@@ -52,15 +51,18 @@ export default {
 
     methods: {
         async createPost(){
+            this.error = '';
             try {
                 const res = await axios.post(`${this.user.id}/posts`, {title: this.form.title, body: this.form.body});
                 if(res.statusText === 'OK'){
                     this.postsToRender = res.data;
-                } else {
-                    this.error = res.statusText;
                 }
             }
             catch(error) {
+                // console.dir(error.response.status);
+                if(error.response.status == 422) {
+                    this.error = error.response.data.message
+                }
                 throw new Error(error.message);
             }
 

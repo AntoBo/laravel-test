@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
 
 class PostController extends Controller
 {
@@ -43,20 +44,22 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-//    public function store(Request $request)
-    public function store(Request $request, User $user)
+    public function store(StorePostRequest $request, User $user)
     {
-
-        $validated = $request->validate([
-            'title' => 'required|unique:posts|max:5',
-            'body' => 'required',
-        ]);
-
+        $validated = $request->validated();
         $user->posts()->create($request->all());
-        return $user->posts;
 
+
+        return response($user->posts);
+//        return $user->posts;
+
+
+
+//        $validated = $request->validate([
+//            'title' => 'required|unique:posts|max:5',
+//            'body' => 'required',
+//        ]);
 //        dd($request->all());
-
 //        $user = User::find($request->id);
 //        $post = new Post(['title' => $request->title, 'body' => $request->body]);
 //        $post = Post::create($request->all());
